@@ -1,0 +1,83 @@
+{% extends 'base.html' %}   {# 继承的模板文件 #}
+
+{% load diy_tags %}     {# 导入自定义标签 #}
+
+{% load static %}
+
+{% block css_file %}       {# 这里是需要导入的css文件 #}
+    <link rel="stylesheet" href="{% static 'css/blog.css' %}">
+{% endblock %}
+
+{% block title %}   {# 这里是页面窗口的标题名 #}
+    花若盛開 蝴蝶自來
+{% endblock %}
+
+
+{% block home_active %} {# 这里是博客的点击效果 #}
+    class="nav-active"
+{% endblock %}
+
+{% block content %}     {# 这里是内容 #}
+    <div class="container"><!--容器-->
+        <div class="row">
+            <div class="col-xs-12 col-md-9">
+
+            </div>
+            <div class="hidden-xs col-md-3">
+              <div class="panel panel-default">
+                  <div class="panel-heading">个人空间</div>
+                  <div class="panel-body">
+                    <div class="container">
+                      <div class="row">
+                          <div class="col me-spase">
+                            <a href="https://github.com/wongjyusing" target="_blank">GitHub</a>
+                            <a href="https://github.com/wongjyusing" target="_blank">WeChat</a>
+                            <a href="https://github.com/wongjyusing" target="_blank">GitBook</a>
+                          </div>
+
+
+
+                      </div>
+                    </div>
+
+                  </div>
+              </div>
+              <div class="panel panel-default">
+                  <div class="panel-heading">全部分类</div>
+                  <div class="panel-body blog-tags">
+                    {% get_blog_type_list as type_list %}     {# 实例化函数名 #}
+                    {% for type in type_list %}
+                       <li class="blog-type-tag"><a href="{% url 'blog_type' type.slug %}">{{ type.name }}</a></li>
+                    {% empty %}
+                        <p>暂无分类 敬请期待</p>
+                    {% endfor %}
+                  </div>
+              </div>
+              {# 标签 #}
+              <div class="panel panel-default">
+                  <div class="panel-heading">标签列表</div>
+                  <div class="panel-body blog-tags">
+                      {% get_blog_tag_list as tag_list %}
+                      {% for tag in tag_list %}
+                          <li class="blog-type-tag"><a href="{% url 'blog_tag' tag.slug %}">{{ tag.name }}</a></li>
+                      {% empty %}
+                          <p>暂无分类 敬请期待</p>
+                      {% endfor %}
+                  </div>
+              </div>
+              {# 友情链接 #}
+              <div class="panel panel-default">
+                  <div class="panel-heading">友情链接</div>
+                  <div class="panel-body blog-tags">
+                      {% get_friend_link as friend_list %}
+                      {% for link in friend_list %}
+                          <li><a class="blog-type-tag" href="{{ link.link }}">{{ link.name }}</a></li>
+                      {% empty %}
+                          <p>暂无友情链接</p>
+                      {% endfor %}
+                  </div>
+              </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}

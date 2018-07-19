@@ -1,0 +1,43 @@
+{% extends 'base.html' %}   {# 继承的模板文件 #}
+
+{% load static %}
+
+{% load count_tag %}    {# 导入计数器 #}
+
+{% block title %}   {# 这里是页面窗口的标题名 #}
+    {{ blog.title }}
+{% endblock %}
+
+{% block css_file %}       {# 这里是需要导入的css文件 #}
+    <link rel="stylesheet" href="{% static 'css/blog.css' %}">
+{% endblock %}
+
+{% block blog_active %} {# 这里是博客的点击效果 #}
+    class="nav-active"
+{% endblock %}
+
+{% block content %}     {# 这里是内容 #}
+    <div class="container">
+        <div class="row">
+            <div class="col-xs-12 col-sm-10">
+                <div class="panel panel-default">
+                    <div class="panel-heading">
+                        <h3 class="panel-title" style="text-align: center;font-size: 40px">{{ blog.title }}</h3>
+                    </div>
+                    <div class="panel-body">
+                      <p class="detail-nav">阅读数：{% get_read_detail request blog %}&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;创建时间：{{ blog.created_time }}&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;作者：{{ blog.author }}&nbsp;&nbsp;&nbsp;标签：{% for i in blog.blog_tag.values %}
+                          <a href="{% url 'blog_tag' i.slug %}">{{ i.name }}</a>&nbsp;
+                          {% endfor %}</p>
+
+                        {{ blog.body_markdown|safe }}
+                    </div>
+                </div>
+            </div>
+            <div class="hidden-xs col-sm-2">
+              <div class="diy-toc">
+                  {{ blog.toc|safe }}
+              </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}

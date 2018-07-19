@@ -1,0 +1,35 @@
+{% extends 'base.html' %}   {# 继承的模板文件 #}
+
+{% load static %}
+
+{% load count_tag %}    {# 导入计数器 #}
+
+{% block title %}   {# 这里是页面窗口的标题名 #}
+    关于
+{% endblock %}
+
+{% block css_file %}       {# 这里是需要导入的css文件 #}
+    <link rel="stylesheet" href="{% static 'css/blog.css' %}">
+{% endblock %}
+
+{% block about_active %} {# 这里是博客的点击效果 #}
+    class="nav-active"
+{% endblock %}
+
+{% block content %}     {# 这里是内容 #}
+    <div class="container">
+        <div class="row">
+            <div class="col-xs-12">
+                <div class="panel panel-default">
+                    <div class="panel-heading">
+                        <h3 class="panel-title" style="text-align: center;font-size: 40px">关于本人</h3>
+                    </div>
+                    <div class="panel-body">
+                        {{ blog.body_markdown|safe }}
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+{% endblock %}

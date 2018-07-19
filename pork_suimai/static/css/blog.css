@@ -1,0 +1,24 @@
+div.blog-tags li{
+    list-style: none;
+}
+
+div.diy-toc {
+    position:fixed;
+}
+
+div.toc ul li{
+  list-style: none;
+}
+
+div.toc ul li a{
+  text-decoration: none;
+}
+
+p.detail-nav{
+    text-align: center;
+}
+
+div.me-spase a{
+  padding: 10px;
+  margin: auto;
+}
